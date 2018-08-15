@@ -9,15 +9,11 @@ node()
     }
 
     stage ('Install_Requirements') {
+        sh 'python2.7 -m pip install virtualenv'
+        sh 'virtualenv --python=python2.7 venv'
         sh """
-            echo ${SHELL}
-            [ -d venv ] && rm -rf venv
-            #virtualenv --python=python2.7 venv
-            virtualenv venv
-            #. venv/bin/activate
-            export PATH=${VIRTUAL_ENV}/bin:${PATH}
-            pip install --upgrade pip
-            pip install -r requirements.txt -r dev-requirements.txt
+            . venv bin activate'
+            pip install -r requirements.txt
             make clean
         """
     }
